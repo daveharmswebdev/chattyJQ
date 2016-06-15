@@ -1,26 +1,30 @@
-var chatty = (function($) {
-
-	var users,
-		messages;
+var chatty = (function($, chat) {
 
 	function init() {
 		$.ajax({
 			url: 'data/users.json'
 		}).done(function(usersContent) {
-			users = usersContent.users;
+			chat.users = usersContent.users;
+			chat.users.forEach(loadOption);
 		});
 		$.ajax({
 			url: 'data/messages.json'
 		}).done(function(messagesContent) {
-			messages = messagesContent.messages;
-		})
+			chat.messages = messagesContent.messages;
+		});
+	}
+
+	function loadOption(user) {
+		console.log(user.name, getOptionString(user));
+		$('#userSelect').append(getOptionString(user));
+	}
+
+	function getOptionString(user) {
+		return `<option value=${user.name}>${user.name}</option>`;
 	}
 
 	init();
 
-	return {
-		getUsers: () => users,
-		getMessages: () => messages
-	};
+	return chat;
 
-})(jQuery);
+})(jQuery, chatty || {});
