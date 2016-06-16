@@ -4,18 +4,19 @@ var chatty = (function($, chat) {
 		$.ajax({
 			url: 'data/users.json'
 		}).done(function(usersContent) {
-			chat.users = usersContent.users;
-			chat.users.forEach(loadOption);
+			var tempUsers = usersContent.users;
+			tempUsers.forEach(loadOption);
+			tempUsers.forEach((user) => chat.users.push(user));
 		});
 		$.ajax({
 			url: 'data/messages.json'
 		}).done(function(messagesContent) {
 			chat.messages = messagesContent.messages;
+			chat.messages.forEach((message) => console.log(message));
 		});
 	}
 
 	function loadOption(user) {
-		console.log(user.name, getOptionString(user));
 		$('#userSelect').append(getOptionString(user));
 	}
 
