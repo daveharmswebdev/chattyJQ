@@ -1,5 +1,7 @@
 var chatty = (function($, chat) {
 
+	var loadCounter = 0;
+
 	function init() {
 		$.ajax({
 			url: 'data/users.json'
@@ -19,7 +21,9 @@ var chatty = (function($, chat) {
 	}
 
 	function convertMessage(message) {
+		loadCounter++
 		var obj = {};
+		obj.id = loadCounter;
 		obj.user = message.user;
 		obj.message = message.message;
 		obj.time = new Date().toUTCString();
