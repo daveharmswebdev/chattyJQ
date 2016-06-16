@@ -13,7 +13,8 @@ var chatty = (function($, chat) {
 		}).done(function(messagesContent) {
 			var tempMessages = messagesContent.messages;
 			tempMessages = tempMessages.map(convertMessage);
-			tempMessages.forEach((message) => console.log(message));
+			tempMessages.forEach((message) => chat.setMessages(message));
+			chatty.postMessages();			
 		});
 	}
 
