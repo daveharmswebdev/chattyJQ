@@ -1,5 +1,7 @@
 var chatty = (function($, chat) {
 
+	var loadCounter = 0;
+
 	function init() {
 		$.ajax({
 			url: 'data/users.json'
@@ -14,12 +16,15 @@ var chatty = (function($, chat) {
 			var tempMessages = messagesContent.messages;
 			tempMessages = tempMessages.map(convertMessage);
 			tempMessages.forEach((message) => chat.setMessages(message));
-			chatty.postMessages();			
+			chatty.postMessages();	
+			chatty.setMessageCounter(loadCounter);		
 		});
 	}
 
 	function convertMessage(message) {
+		loadCounter++
 		var obj = {};
+		obj.id = loadCounter;
 		obj.user = message.user;
 		obj.message = message.message;
 		obj.time = new Date().toUTCString();
