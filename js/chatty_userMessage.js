@@ -1,7 +1,7 @@
 var chatty = (function($, chat) {
 
     // private variables
-    var messageCounter = 0,
+    var messageCounter,
     	elMessagesDiv = $('#messagesDiv'),
     	users = [],
     	messages = [],
@@ -53,6 +53,7 @@ var chatty = (function($, chat) {
     	console.log(archive);
     };
     chat.setMessageCounter = (num) => messageCounter = num;
+    chat.getMessageCounter = () => messageCounter;
 
     return chat;
 

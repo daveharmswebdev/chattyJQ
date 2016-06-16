@@ -16,7 +16,8 @@ var chatty = (function($, chat) {
 			var tempMessages = messagesContent.messages;
 			tempMessages = tempMessages.map(convertMessage);
 			tempMessages.forEach((message) => chat.setMessages(message));
-			chatty.postMessages();			
+			chatty.postMessages();	
+			chatty.setMessageCounter(loadCounter);		
 		});
 	}
 
